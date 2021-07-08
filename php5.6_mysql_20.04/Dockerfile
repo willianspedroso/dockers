@@ -26,23 +26,23 @@ RUN apt-get install -y \
 
 RUN add-apt-repository ppa:ondrej/php
 RUN apt-get update && apt-get install -y \
-    php8.0 \
-    php8.0-dev \
-    php8.0-cli \
-    php8.0-gd \
-    php8.0-mbstring \
-    php8.0-intl \
-    php8.0-ldap \
-    php8.0-pgsql \
-    php8.0-mysql \
-    php8.0-mcrypt \
-    php8.0-redis \
-    php8.0-soap \
-    php8.0-curl \
+    php5.6 \
+    php5.6-dev \
+    php5.6-cli \
+    php5.6-gd \
+    php5.6-mbstring \
+    php5.6-intl \
+    php5.6-ldap \
+    php5.6-pgsql \
+    php5.6-mysql \
+    php5.6-mcrypt \
+    php5.6-redis \
+    php5.6-soap \
+    php5.6-curl \
     php-pear \
     php-xml \
-    php8.0-xml \
-    libapache2-mod-php8.0
+    php5.6-xml \
+    libapache2-mod-php5.6
  
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php

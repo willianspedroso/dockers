@@ -2,17 +2,17 @@ version: '3.0'
 
 services:
   php8_v1:
-    image: php8:v1
-    container_name: php8_dev_v1
+    image: php5.6_mysql:v1
+    container_name: php5.6_mysql_dev_v1
     restart: unless-stopped
     volumes:
-      - /home/sistemas/pptec/dockers/php8_20.04/etc/apache2/apache2.conf:/etc/apache2/apache2.conf
-      - /home/sistemas/pptec/dockers/php8_20.04/etc/apache2/sites-enabled:/etc/apache2/sites-enabled
-      - /home/sistemas/pptec/dockers/php8_20.04/etc/rsyslog.d:/etc/rsyslog.d
-      - /home/sistemas/pptec/dockers/php8_20.04/etc/resolv/resolv.conf:/etc/resolv.conf
-      - /home/sistemas/pptec/indicadores_ycon:/var/www/html/
+      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/apache2/apache2.conf:/etc/apache2/apache2.conf
+      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/apache2/sites-enabled:/etc/apache2/sites-enabled
+      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/rsyslog.d:/etc/rsyslog.d
+      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/resolv/resolv.conf:/etc/resolv.conf
+      - /home/sistemas/pptec/factorysys/:/var/www/html/
       # Se o host for linux descomente essa linha para usar o localtime do host
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "8090:80"
+      - "8099:80"
 
