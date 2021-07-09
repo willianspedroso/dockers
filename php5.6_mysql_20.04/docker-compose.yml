@@ -13,7 +13,7 @@ services:
       #- MYSQL_PASSWORD=qweasd
       #- MYSQL_TCP_PORT=3306
     #volumes:
-    #  - datafiles:/var/lib/mysql
+    #  - datafiQqweasd12@les:/var/lib/mysql
     restart: always
 
   php56_v1:

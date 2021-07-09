@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#
+
 # Removing Apache PID if necessary
 rm -f /var/run/apache2/apache2.pid
 
