@@ -63,3 +63,11 @@ $ docker exec -it php5.6_mysql_dev_v1 /bin/bash
 
 $ service apache2 start 
 
+
+#
+# deve estar logado no docker.io commandos:
+# -- docker pull mysql:5.7.34
+# -- docker run --name mysql-erp -e MYSQL_ROOT_PASSWORD=qweasd -p3306:3306 -d mysql:5.7.34
+# -- docker exec -it mysql-erp mysql -uroot -p
+# --- grant all privileges on *.* to 'root'@'%' identified by 'qweasd' with grant option;
+

@@ -1,20 +1,37 @@
 version: '3.0'
 
 services:
+  mysql:
+    image: mysql:5.7.34
+    container_name: mysql-erp
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=qweasd
+      #- MYSQL_DATABASE= factorysys
+      #- MYSQL_USER=root
+      #- MYSQL_PASSWORD=qweasd
+      #- MYSQL_TCP_PORT=3306
+    #volumes:
+    #  - datafiles:/var/lib/mysql
+    restart: always
+
   php56_v1:
     image: php56:v1
     container_name: php56_dev_v1
     restart: unless-stopped
     volumes:
-      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/apache2/apache2.conf:/etc/apache2/apache2.conf
-      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/apache2/sites-enabled:/etc/apache2/sites-enabled
-      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/php/5.6/apache2/php.ini:/etc/php/5.6/apache2/php.ini
-      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/php/5.6/cli/php.ini:/etc/php/5.6/cli/php.ini      
-      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/rsyslog.d:/etc/rsyslog.d
-      - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/resolv/resolv.conf:/etc/resolv.conf
-      - /home/sistemas/pptec/factorysys/:/var/www/html/
+      - /c/home/pptec/dockers/php5.6_mysql_20.04/etc/apache2/apache2.conf:/etc/apache2/apache2.conf
+      - /c/home/pptec/dockers/php5.6_mysql_20.04/etc/apache2/sites-enabled:/etc/apache2/sites-enabled
+      - /c/home/pptec/dockers/php5.6_mysql_20.04/etc/php/5.6/apache2/php.ini:/etc/php/5.6/apache2/php.ini
+      - /c/home/pptec/dockers/php5.6_mysql_20.04/etc/php/5.6/cli/php.ini:/etc/php/5.6/cli/php.ini      
+      - /c/home/pptec/dockers/php5.6_mysql_20.04/etc/rsyslog.d:/etc/rsyslog.d
+      - /c/home/pptec/dockers/php5.6_mysql_20.04/etc/resolv/resolv.conf:/etc/resolv.conf
+      - /c/home/pptec/factorysys/:/var/www/html/
       # Se o host for linux descomente essa linha para usar o localtime do host
-      - /etc/localtime:/etc/localtime:ro
+      #- /etc/localtime:/etc/localtime:ro
     ports:
       - "8099:80"
+    depends_on: 
+      - mysql
 
