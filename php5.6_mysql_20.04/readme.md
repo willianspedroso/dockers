@@ -26,7 +26,7 @@ Para o dockers seguir o seguinte procedimento:
 1. Abra um shell dentro da pasta do onde está o Dockerfile
 2. Executar o comando de build da imagem:
 
-$ docker build --no-cache -t php5.6_mysql:v1 .
+$ docker build --no-cache -t php56:v1 .
 
 Nota: o v1 é a versão da imagem. Se já tiver uma imagem e quiser criar uma nova mude v1 para v2 por exemplo e atualize o item image docker-compose.yml
 
