@@ -65,13 +65,13 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 # XDebug Install
-RUN yes | pecl install xdebug \
-    && echo "zend_extension=$(find /usr/lib/php/ -name xdebug.so)" > /etc/php/8.0/mods-available/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /etc/php/8.0/mods-available/xdebug.ini \
-    && echo "xdebug.remote_autostart=off" >> /etc/php/8.0/mods-available/xdebug.ini
+#RUN yes | pecl install xdebug \
+#    && echo "zend_extension=$(find /usr/lib/php/ -name xdebug.so)" > /etc/php/8.0/mods-available/xdebug.ini \
+#    && echo "xdebug.remote_enable=on" >> /etc/php/8.0/mods-available/xdebug.ini \
+#    && echo "xdebug.remote_autostart=off" >> /etc/php/8.0/mods-available/xdebug.ini
 
-RUN cp /etc/php/8.0/mods-available/xdebug.ini /etc/php/8.0/cli/conf.d/. \
-    && cp /etc/php/8.0/mods-available/xdebug.ini /etc/php/8.0/apache2/conf.d/.
+#RUN cp /etc/php/8.0/mods-available/xdebug.ini /etc/php/8.0/cli/conf.d/. \
+#    && cp /etc/php/8.0/mods-available/xdebug.ini /etc/php/8.0/apache2/conf.d/.
 
 # Habilita modulos
 RUN rm -rf /etc/apache2/mods-enabled/ssl.load 

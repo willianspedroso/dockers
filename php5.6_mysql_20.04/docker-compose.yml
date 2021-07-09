@@ -1,9 +1,9 @@
 version: '3.0'
 
 services:
-  php8_v1:
-    image: php5.6_mysql:v1
-    container_name: php5.6_mysql_dev_v1
+  php56_v1:
+    image: php56:v1
+    container_name: php56_dev_v1
     restart: unless-stopped
     volumes:
       - /home/sistemas/pptec/dockers/php5.6_mysql_20.04/etc/apache2/apache2.conf:/etc/apache2/apache2.conf
