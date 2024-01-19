@@ -1,0 +1,18 @@
+version: '3.0'
+
+services:
+  server_php7:
+    image: it_health_api_php7:v1
+    container_name: it_health_api_php7_dev
+    restart: unless-stopped
+    volumes:
+      - /home/sistemas/rhhealth/dev_ambientes/it_health_api_php7/etc/apache2:/etc/apache2
+      - /home/sistemas/rhhealth/dev_ambientes/it_health_api_php7/etc/rsyslog.d:/etc/rsyslog.d
+      - /home/sistemas/rhhealth/dev_ambientes/it_health_api_php7/etc/resolv/resolv.conf:/etc/resolv.conf
+      - /home/sistemas/rhhealth/api_rhhealth/:/home/sistemas/rhhealth/api_rhhealth/
+      # Se o host for linux descomente essa linha para usar o localtime do host
+      - /etc/localtime:/etc/localtime:ro 
+    ports:
+      - "8487:443"
+      - "8087:80"
+

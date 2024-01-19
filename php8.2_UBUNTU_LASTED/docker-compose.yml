@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+  php82_v1:
+    image: catalogador_web_82:v1
+    container_name: catalogador_web_82_dev_v1
+    restart: unless-stopped
+    volumes:
+      #- /c/home/pptec/dockers/php8.2_UBUNTU_LASTED/etc/apache2/apache2.conf:/etc/apache2/apache2.conf
+      - /c/home/pptec/dockers/php8.2_UBUNTU_LASTED/etc/apache2/sites-enabled:/etc/apache2/sites-enabled
+      #- /c/home/pptec/dockers/php8.2_UBUNTU_LASTED/etc/rsyslog.d:/etc/rsyslog.d
+      #- /c/home/pptec/dockers/php8.2_UBUNTU_LASTED/etc/resolv/resolv.conf:/etc/resolv.conf
+      - /c/home/pptec/catalogador_web:/var/www/html/
+      # Se o host for linux descomente essa linha para usar o localtime do host
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "8098:80"
+    networks:
+      - mysql
+networks:
+  mysql:
+    name: php56_mysql_2004_default
+    external: true
+
