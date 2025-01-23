@@ -14,5 +14,5 @@ services:
       # Se o host for linux descomente essa linha para usar o localtime do host
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "8090:80"
+      - "8098:80"
 

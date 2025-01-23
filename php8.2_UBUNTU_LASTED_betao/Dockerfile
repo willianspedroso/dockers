@@ -43,8 +43,7 @@ RUN apt-get update && apt-get install -y \
     php-pear \
     php8.2-xml \
     php8.0-xml \
-    libapache2-mod-php8.0 \
-    libfann-dev
+    libapache2-mod-php8.0
  
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php

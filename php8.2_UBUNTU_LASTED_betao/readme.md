@@ -14,10 +14,10 @@ O host onde será executado o docker deve ter instalado:
 
 Os fontes da aplicação devem ficar numa pasta que será mapeada para /home/sistemas dentro do docker pelo docker-compose.yml.
 
-Para o dockers seguir o seguinte procedimento:
+Para o BtecApiCore seguir o seguinte procedimento:
 
-1. Criar uma pasta onde vai ficar os dockers (Ex.: d:/dev/fontes)
-2. Baixar o dockers para dentro dessa pasta via git (Ex.: d:/dev/fontes/BtecApiCore)
+1. Criar uma pasta onde vai ficar o BtecApiCore (Ex.: d:/dev/fontes)
+2. Baixar o BtecApiCore para dentro dessa pasta via git (Ex.: d:/dev/fontes/BtecApiCore)
 3. Copiar o arquivo docker-compose-MODELO.yml para docker-compose.yml
 4. Atualizar o docker-compose.yml trocando PASTA/PARA/HOME para d:/dev/fontes
 
@@ -26,7 +26,8 @@ Para o dockers seguir o seguinte procedimento:
 1. Abra um shell dentro da pasta do onde está o Dockerfile
 2. Executar o comando de build da imagem:
 
-$ docker build --no-cache -t php56:v1 .
+### comando antigo $ docker build -t  server_php7:v1 .  
+$ docker build --no-cache -t bruxosia_82:v1 . 
 
 Nota: o v1 é a versão da imagem. Se já tiver uma imagem e quiser criar uma nova mude v1 para v2 por exemplo e atualize o item image docker-compose.yml
 
@@ -45,7 +46,9 @@ $ docker-compose up -d
 
 Para verificar o funcionamento abra um browser na URL: 
 
-http://localhost:8099/api/v2/
+http://localhost:8087/api/v2/
+
+Isso deve entregar um CakePHP
 
 Caso não retorne nada siga o procedimento abaixo:
 
@@ -53,24 +56,13 @@ Caso não retorne nada siga o procedimento abaixo:
 
 $ docker ps 
 
-E veja se o container php5.6_mysql_dev_v1 está rodando. 
+E veja se o container server_php7 está rodando. 
 
 2. Entre no container usando:
 
-$ docker exec -it php5.6_mysql_dev_v1 /bin/bash
+$ docker exec -it server_php7 /bin/bash
 
 3. Suba o Apache manualmente com:
 
 $ service apache2 start 
 
-
-#
-# deve estar logado no docker.io commandos:
-# -- docker pull mysql:5.7.34
-# -- docker run --name mysql-erp -e MYSQL_ROOT_PASSWORD=qweasd -p3306:3306 -d mysql:5.7.34
-# -- docker exec -it mysql-erp mysql -uroot -p
-# --- grant all privileges on *.* to 'root'@'%' identified by 'qweasd' with grant option;
-# --- SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
-
-
-grant all privileges on *.* to 'root'@'%' identified by 'qweasd' with grant option; SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));

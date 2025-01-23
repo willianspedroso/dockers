@@ -1,0 +1,20 @@
+version: '3.0'
+
+services:
+  php82_v1:
+    image: bruxosia_82:v1
+    container_name: betao_82_dev_v1
+    restart: unless-stopped
+    volumes:
+      - /c/home/pptec/dockers/php8.2_UBUNTU_LASTED_betao/etc/apache2/sites-enabled:/etc/apache2/sites-enabled
+      - /c/home/pptec/betao:/var/www/html/
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "8095:80"
+    networks:
+      - mysql
+networks:
+  mysql:
+    name: php56_mysql_2004_default
+    external: true
+
