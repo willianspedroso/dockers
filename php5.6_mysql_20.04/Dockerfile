@@ -2,22 +2,37 @@ FROM ubuntu:20.04
 
 # Evita perguntas interativas durante a instalação
 ENV DEBIAN_FRONTEND=noninteractive
-ENV ACCEPT_EULA=Y
+#ENV ACCEPT_EULA=Y
 
 # Atualiza e instala dependências básicas de sistema e repositório
-RUN apt-get update && apt-get install -y \
-    locales \
-    software-properties-common \
+##RUN apt-get update && apt-get install -y \
+##    locales \
+##    software-properties-common \
+##    ca-certificates \
+##    curl \
+##    gnupg2 \
+##    && locale-gen en_US.UTF-8
+##
+### Adiciona a chave GPG do repositório manualmente para evitar erro de assinatura
+##RUN curl -sS https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c | apt-key add - \
+##    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ondrej-php.list
+##
+##ENV LANG=en_US.UTF-8
+
+# Instala o essencial para baixar a chave com segurança
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
-    gnupg2 \
-    && locale-gen en_US.UTF-8
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
 
-# Adiciona a chave GPG do repositório manualmente para evitar erro de assinatura
-RUN curl -sS https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c | apt-key add - \
-    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ondrej-php.list
+# 1. Cria o diretório para chaves se não existir
+# 2. Baixa a chave GPG diretamente para um arquivo gpg
+# 3. Adiciona o repositório manualmente no sources.list
+RUN mkdir -p /etc/apt/keyrings \
+    && curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c" | gpg --dearmor -o /etc/apt/keyrings/php.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/php.gpg] http://ppa.launchpad.net/ondrej/php/ubuntu focal main" > /etc/apt/sources.list.d/php.list
 
-ENV LANG=en_US.UTF-8
 
 # Adiciona o PPA e instala o PHP 5.6 em um único bloco para garantir o update
 RUN add-apt-repository ppa:ondrej/php -y && \
