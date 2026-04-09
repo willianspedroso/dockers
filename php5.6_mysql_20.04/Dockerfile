@@ -1,31 +1,24 @@
 FROM ubuntu:20.04
 
-ENV ACCEPT_EULA=Y
+# Evita perguntas interativas durante a instalação
 ENV DEBIAN_FRONTEND=noninteractive
+ENV ACCEPT_EULA=Y
 
-RUN apt-get update
-RUN apt-get install -y locales
-RUN locale-gen en_US.UTF-8
+# Atualiza e instala dependências básicas de sistema e repositório
+RUN apt-get update && apt-get install -y \
+    locales \
+    software-properties-common \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    && locale-gen en_US.UTF-8
+
 ENV LANG=en_US.UTF-8
 
-RUN apt-get install -y software-properties-common
-RUN apt-get update -y
-
-RUN apt-get install -y \
-    apt-transport-https \
-    cron \
-    curl \
-    git \
-    gnupg2 \
-    libpq-dev \
-    unzip \
-    vim \
-    apache2 \
-    htop
-
-
-RUN add-apt-repository ppa:ondrej/php
-RUN apt-get update && apt-get install -y \
+# Adiciona o PPA e instala o PHP 5.6 em um único bloco para garantir o update
+RUN add-apt-repository ppa:ondrej/php -y && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
     php5.6 \
     php5.6-dev \
     php5.6-cli \
@@ -40,9 +33,13 @@ RUN apt-get update && apt-get install -y \
     php5.6-soap \
     php5.6-curl \
     php-pear \
-    php-xml \
     php5.6-xml \
-    libapache2-mod-php5.6
+    libapache2-mod-php5.6 \
+    apache2 \
+    git \
+    unzip \
+    vim \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
  
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php
