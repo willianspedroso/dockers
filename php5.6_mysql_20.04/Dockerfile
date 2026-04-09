@@ -13,6 +13,10 @@ RUN apt-get update && apt-get install -y \
     gnupg2 \
     && locale-gen en_US.UTF-8
 
+# Adiciona a chave GPG do repositório manualmente para evitar erro de assinatura
+RUN curl -sS https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c | apt-key add - \
+    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ondrej-php.list
+
 ENV LANG=en_US.UTF-8
 
 # Adiciona o PPA e instala o PHP 5.6 em um único bloco para garantir o update
